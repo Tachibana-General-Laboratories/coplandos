@@ -1,4 +1,4 @@
-# coplandos 0.1.0
+# coplandos 0.1.1
 
 Поддерживаемые платфотрмы на данный момент: qemu-system-i386 и qemu-system-arm
 
