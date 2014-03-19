@@ -11,6 +11,6 @@ if [ ! -d $TOOLCHAIN_PATH ]; then
 	popd
 fi
 
-export PATH="$TOOLCHAIN_PATH:$PATH"
+export PATH="$TOOLCHAIN_PATH/bin:$PATH"
 export QEMU=qemu-system-$TARGET
 
