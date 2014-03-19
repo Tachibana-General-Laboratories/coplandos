@@ -24,7 +24,7 @@ int kprintf(const char* restrict format, ...) {
 	int i = vsprintf(buf, fmt, args);
 	va_end(args);
 
-	puts(buf);
+	puts(buf, i);
 
 	return i;
 }
