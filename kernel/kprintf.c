@@ -17,7 +17,7 @@ static void puts(const char *s, int len) {
 
 static char buf[1024];
  
-int kprintf(const char* restrict format, ...) {
+int kprintf(const char* restrict fmt, ...) {
 	va_list args;
 
 	va_start(args, fmt);

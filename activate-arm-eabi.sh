@@ -3,7 +3,7 @@
 export TARGET=arm
 export TOOLPREFIX=arm-eabi
 
-TOOLCHAIN_PATH="`pwd`/toolchain/$TARGET/bin"
+TOOLCHAIN_PATH="`pwd`/toolchain/$TOOLPREFIX/bin"
 
 if [ ! -d $TOOLCHAIN_PATH ]; then 
 	pushd toolchain

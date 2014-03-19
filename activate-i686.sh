@@ -3,7 +3,7 @@
 export TARGET=i386
 export TOOLPREFIX=i686-elf
 
-TOOLCHAIN_PATH="`pwd`/toolchain/$TARGET/bin"
+TOOLCHAIN_PATH="`pwd`/toolchain/$TOOLPREFIX"
 
 if [ ! -d $TOOLCHAIN_PATH ]; then 
 	pushd toolchain
