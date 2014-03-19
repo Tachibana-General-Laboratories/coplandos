@@ -1,3 +1,4 @@
+#include <kprintf.h>
 #include <stdint.h>
 #include <string.h>
 #include <stdarg.h>

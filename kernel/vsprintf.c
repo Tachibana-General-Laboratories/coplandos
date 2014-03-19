@@ -1,6 +1,7 @@
 /* vsprintf.c -- Lars Wirzenius & Linus Torvalds. */
 /*
  * Wirzenius wrote this portably, Torvalds fucked it up :-)
+ * And Lain-dono fix this shit ^_^
  */
 
 #include <stdarg.h>
@@ -26,11 +27,6 @@ static int skip_atoi(const char **s)
 #define SPECIAL	32		/* 0x */
 #define SMALL	64		/* use 'abcdef' instead of 'ABCDEF' */
 
-#define do_div(n,base) ({ \
-int __res; \
-__asm__("divl %4":"=a" (n),"=d" (__res):"0" (n),"1" (0),"r" (base)); \
-__res; })
-
 static char * number(char * str, int num, int base, int size, int precision
 	,int type)
 {
@@ -49,14 +45,15 @@ static char * number(char * str, int num, int base, int size, int precision
 	} else
 		sign=(type&PLUS) ? '+' : ((type&SPACE) ? ' ' : 0);
 	if (sign) size--;
-	if (type&SPECIAL)
+	if (type&SPECIAL) {
 		if (base==16) size -= 2;
 		else if (base==8) size--;
+	}
 	i=0;
 	if (num==0)
 		tmp[i++]='0';
 	else while (num!=0)
-		tmp[i++]=digits[do_div(num,base)];
+		tmp[i++]=digits[num % base];
 	if (i>precision) precision=i;
 	size -= precision;
 	if (!(type&(ZEROPAD+LEFT)))
@@ -64,13 +61,14 @@ static char * number(char * str, int num, int base, int size, int precision
 			*str++ = ' ';
 	if (sign)
 		*str++ = sign;
-	if (type&SPECIAL)
+	if (type&SPECIAL) {
 		if (base==8)
 			*str++ = '0';
 		else if (base==16) {
 			*str++ = '0';
 			*str++ = digits[33];
 		}
+	}
 	if (!(type&LEFT))
 		while(size-->0)
 			*str++ = c;
