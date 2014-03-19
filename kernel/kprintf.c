@@ -2,10 +2,11 @@
 #include <stdint.h>
 #include <string.h>
 #include <stdarg.h>
+#include <uart.h>
 
 static void putc(char c) {
 #ifdef UART_DRIVER
-	write_serial(c);
+	write_uart(c);
 #endif
 #ifdef VGA_TERM_DRIVER
 	terminal_write(c);
@@ -13,7 +14,7 @@ static void putc(char c) {
 }
 
 static void puts(const char *s, int len) {
-	while(len--) putc(*s++);
+	while(*s) putc(*s++);
 }
 
 static char buf[1024];
