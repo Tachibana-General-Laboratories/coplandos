@@ -23,7 +23,8 @@ export AS := $(TOOLPREFIX)-as
 export LD := $(TOOLPREFIX)-ld
 export OBJCOPY := $(TOOLPREFIX)-objcopy
 export OBJDUMP := $(TOOLPREFIX)-objdump
-export CFLAGS := $(CFLAGS) -std=c99 -ffreestanding -Wall -Wextra
+export STRIP := $(TOOLPREFIX)-strip
+export CFLAGS := $(CFLAGS) -std=c99 -ffreestanding -Wall -Wextra -ggdb3
 export ASFLAGS := $(ASFLAGS)
 export LDFLAGS := $(LDFLAGS) -nostdlib -lgcc
 
@@ -39,4 +40,7 @@ clean:
 
 qemu: kernel/kernel
 	$(QEMU) -kernel kernel/kernel -serial mon:stdio -smp 1 -m 512 
+
+qemu-gdb: kernel/kernel
+	$(QEMU) -kernel kernel/kernel -serial mon:stdio -smp 1 -m 512 -s -S
 
